@@ -24,6 +24,16 @@ module GithubSearch
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    config.before_configuration do
+      env_file = File.join(Rails.root, '.env')
+
+      File.open(env_file).each do |i|
+        k, v = i.split('=')
+
+        ENV[k.to_s] = v.strip
+      end if File.exists?(env_file)
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -38,3 +48,4 @@ module GithubSearch
     config.api_only = true
   end
 end
+
