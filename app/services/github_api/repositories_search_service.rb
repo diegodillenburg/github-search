@@ -26,7 +26,7 @@ module GithubApi
     end
 
     def search_repositories
-      HTTParty.get("#{BASE_URL}/search/repositories?q=#{@q}&sort=#{@sort}&order=#{@order}&page=#{@page}&per_page=100",
+      HTTParty.get("#{BASE_URL}/search/repositories?q=#{@q}&sort=#{@sort}&order=#{@order}&page=#{@page}&per_page=10",
                    headers: @headers, basic_auth: @auth)
     end
   end
