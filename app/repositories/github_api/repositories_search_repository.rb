@@ -9,17 +9,18 @@ module GithubApi
 
         query = build_query(params) 
 
-        GithubApi::RepositoriesSearchService.search_repositories(query, params[:sort], params[:order], params[:page])
+        res = GithubApi::RepositoriesSearchService.search_repositories(query, params[:sort], params[:order], params[:page])
+
+        build_entities(res['items'])
       end
 
       private
 
-      def build_query(params)
-        keywords = params[:keywords]
+      def default_values(params)
+        params[:language] ||= 'ruby'
+        params[:page] ||= 1
 
-        qualifiers = params.except(:keywords, :sort, :order, :page).map { |k, v| " #{k}:#{v}" }.join
-
-        "#{keywords}#{qualifiers}"
+        params
       end
 
       def validate_params(params, keys)
@@ -31,20 +32,24 @@ module GithubApi
       end
 
       def validate_sort(sort)
-        %w(stars fork updated).include?(sort) ? sort : 'updated' 
+        %w(stars forks updated).include?(sort) ? sort : 'updated' 
       end
 
       def validate_order(order)
         %w(asc desc).include?(order) ? order : 'desc'
       end
 
-      def default_values(params)
-        params[:language] ||= 'ruby'
-        params[:page] ||= 1
+      def build_query(params)
+        keywords = params[:keywords]
 
-        params
+        qualifiers = params.except(:keywords, :sort, :order, :page).map { |k, v| " #{k}:#{v}" }.join
+
+        "#{keywords}#{qualifiers}"
       end
 
+      def build_entities(items)
+        items.map { |item| RepositoryEntity.new(item) }
+      end
     end
   end
 end
