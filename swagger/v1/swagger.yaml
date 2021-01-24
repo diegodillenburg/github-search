@@ -1,0 +1,97 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/search":
+    get:
+      summary: List repositories
+      tags:
+      - Repositories
+      parameters:
+      - name: keywords
+        description: Free text terms search
+        in: query
+        schema:
+          type: string
+        required: false
+        value: tetris
+      - name: language
+        description: Language to search - defaults to Ruby
+        in: query
+        schema:
+          type: string
+        required: false
+        value: Ruby
+      - name: user
+        description: Authoring filter by GitHub username 
+        in: query
+        schema:
+          type: string
+        required: false
+      - name: sort
+        description: Sorting criteria
+        in: query
+        schema:
+          type: string
+          enum: [stars, forks, updated]
+        required: false
+        value: updated
+      - name: order
+        description: Sorting criteria ordering
+        in: query
+        schema:
+          type: string
+          enum: [asc, desc]
+        required: false
+        value: desc
+      - name: page
+        description: Page number
+        in: query
+        schema:
+          type: integer
+        required: false
+        value: 1
+      responses:
+        '200':
+          description: Repositories found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      type:
+                        type: string
+                      attributes:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          description:
+                            type: string
+                          author:
+                            type: string
+                          stars:
+                            type: integer
+                          forks:
+                            type: integer
+                          updated_at:
+                            type: string
+                  meta:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                      total_pages:
+                        type: integer
+servers:
+- url: http://localhost:3000
+  variables:
+    defaultHost:
+      default: http://localhost:3000

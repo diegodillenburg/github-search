@@ -10,10 +10,13 @@ gem 'httparty'
 gem 'jsonapi-serializer'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
+gem 'rswag-api'
+gem 'rswag-ui'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0.2'
+  gem 'rswag-specs'
 end
 
 group :development do
