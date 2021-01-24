@@ -3,7 +3,7 @@ class RepositoriesSearchController < ApplicationController
   def index
     res = GithubApi::RepositoriesSearchRepository.search(repositories_search_params.to_h)
 
-    render json: RepositorySerializer.new(res).serializable_hash
+    render json: RepositorySerializer.new(res[:resources], meta: { page: res[:page], total_pages: res[:total_pages] }).serializable_hash
   end
 
   private

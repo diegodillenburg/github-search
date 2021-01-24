@@ -11,7 +11,7 @@ module GithubApi
 
         res = GithubApi::RepositoriesSearchService.search_repositories(query, params[:sort], params[:order], params[:page])
 
-        build_entities(res['items'])
+        build_response(res, params[:page])
       end
 
       private
@@ -49,6 +49,16 @@ module GithubApi
 
       def build_entities(items)
         items.map { |item| RepositoryEntity.new(item) }
+      end
+
+      def build_response(data, page)
+        res = {}
+
+        res[:resources] = build_entities(data['items'])
+        res[:total_pages] = (data['total_count'] / 100) + 1
+        res[:page] = page.to_i
+
+        res
       end
     end
   end
