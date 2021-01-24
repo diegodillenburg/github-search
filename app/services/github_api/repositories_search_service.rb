@@ -3,26 +3,31 @@ module GithubApi
     include HTTParty
     BASE_URL = 'https://api.github.com'
     GITHUB_API_TOKEN = ENV['GITHUB_API_TOKEN']
+    GITHUB_API_USERNAME = ENV['GITHUB_API_USERNAME']
 
     class << self
-      def search_repositories(q)
-        new(q).search_repositories
+      def search_repositories(q, sort, order, page)
+        new(q, sort, order, page).search_repositories
       end
     end
 
-    def initialize(q)
-      @q = q
+    def initialize(q=nil, sort, order, page)
+      @q = "#{q} is:public"
+      @sort = sort
+      @order = order
+      @page = page
       @headers = {
         'Accept' => 'application/vnd.github.v3+json'
       }
       @auth = {
-        username: 'diegodillenburg',
+        username: GITHUB_API_USERNAME,
         password: GITHUB_API_TOKEN
       }
     end
 
     def search_repositories
-      HTTParty.get("#{BASE_URL}/search/repositories?q=#{@q}", headers: @headers, basic_auth: @auth)
+      HTTParty.get("#{BASE_URL}/search/repositories?q=#{@q}&sort=#{@sort}&order=#{@order}&page=#{@page}&per_page=100",
+                   headers: @headers, basic_auth: @auth)
     end
   end
 end
