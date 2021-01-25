@@ -1,33 +1,55 @@
-# README
+# GitHub-Search
+Integração com o endpoint de busca de repositórios da API do GitHub
 
-      # params = {
-      #   keywords: 'what id like to search',
-      #   language: 'Ruby',
-      #   sort: /stars|forks|updated/,
-      #   order: /asc|desc/,
-      #   page: 1
-      #   }
+## Configuração
 
+Requisitos:
+- Ruby 3.0.0 ou;
+- Docker & docker-compose instalados
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Variáveis de Ambiente
+- Criar um arquivo `.env` na raiz do projeto contendo:
 
-Things you may want to cover:
+```
+GITHUB_API_USERNAME=your_username_goes_here
+GITHUB_API_TOKEN=your_token_goes_here
+# Endereço das chamadas do Swagger
+HOST_ADDRESS=http://localhost:3000
+```
 
-* Ruby version
+#### Variáveis adicionais quando utilizado docker-compose
+```
+COMPOSE_PROJECT_NAME=app
+RAILS_ENV=development
+RAILS_PORT=3000
+RAILS_BIND=0.0.0.0
+```
 
-* System dependencies
+Para maiores informações sobre como gerar um token para sua API:
 
-* Configuration
+- [GitHub: Criando token de acesso pessoal](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token)
 
-* Database creation
+### Rodando a aplicação
 
-* Database initialization
+- Instalar dependências
+```ruby
+bundle install
+```
 
-* How to run the test suite
+- Executar o web server
+```
+rails s
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Rodando via Docker
 
-* Deployment instructions
+Alternativamente, você pode rodar a aplicaçào com base nos `Dockerfile` e `docker-compose.yml` fornecidos.
 
-* ...
+- Iniciar o container
+```bash
+docker-compose up
+```
+
+## Documentação
+
+- A documentação da API encontra-se disponível na rota `/api-docs`
