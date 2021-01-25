@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        INSTALL_PATH: "/${COMPOSE_PROJECT_NAME}"
+        RAILS_PORT: ${RAILS_PORT}
+    command:
+      - /bin/sh
+      - -c
+      - |
+        rm -rf tmp/pids
+        RAILS_ENV=${RAILS_ENV} bundle exec rails s -p ${RAILS_PORT} -b ${RAILS_BIND}
+    env_file:
+      - '.env'
+    ports:
+      - "${RAILS_PORT}:${RAILS_PORT}"
