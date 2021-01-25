@@ -1,3 +1,0 @@
-class GithubResponseEntity
-
-end
