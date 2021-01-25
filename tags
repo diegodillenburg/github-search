@@ -6,14 +6,7 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 Api	app/controllers/api/v1/repositories_search_controller.rb	/^module Api$/;"	m
 Application	config/application.rb	/^  class Application < Rails::Application$/;"	c	class:GithubSearch
-ApplicationCable	app/channels/application_cable/channel.rb	/^module ApplicationCable$/;"	m
-ApplicationCable	app/channels/application_cable/connection.rb	/^module ApplicationCable$/;"	m
 ApplicationController	app/controllers/application_controller.rb	/^class ApplicationController < ActionController::API$/;"	c
-ApplicationJob	app/jobs/application_job.rb	/^class ApplicationJob < ActiveJob::Base$/;"	c
-ApplicationMailer	app/mailers/application_mailer.rb	/^class ApplicationMailer < ActionMailer::Base$/;"	c
-ApplicationRecord	app/models/application_record.rb	/^class ApplicationRecord < ActiveRecord::Base$/;"	c
-Channel	app/channels/application_cable/channel.rb	/^  class Channel < ActionCable::Channel::Base$/;"	c	class:ApplicationCable
-Connection	app/channels/application_cable/connection.rb	/^  class Connection < ActionCable::Connection::Base$/;"	c	class:ApplicationCable
 GithubApi	app/repositories/github_api/repositories_search_repository.rb	/^module GithubApi$/;"	m
 GithubApi	app/services/github_api.rb	/^module GithubApi$/;"	m
 GithubApi	app/services/github_api/repositories_search_service.rb	/^module GithubApi$/;"	m
